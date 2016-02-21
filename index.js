@@ -1,10 +1,11 @@
 var async = require('async');
 var mqNode = require('mq-node');
+var _ = require('lodash');
 var fs = require('fs');
 var mysqlu = require('mysql');
 
 var mysql;
-
+var tempdest = './data.sql';
 var extend = function(obj) {
 	for (var i = 1; i < arguments.length; i++) for (var key in arguments[i]) obj[key] = arguments[i][key];
 	return obj;
@@ -57,7 +58,10 @@ var buildInsert = function(rows,table,cols){
 	return sql.join('\n');
 }
 
-var createdump = function(connectiondetails,done){
+var createdump = function(options,done){
+
+	options.dest = tempdest;
+	
 	var defaultConnection = {
 		host: 'localhost',
 		user: 'root',
@@ -152,7 +156,7 @@ var createdump = function(connectiondetails,done){
 var copytodestinatoin = function(connectiondetails,done){
 	var connection = mysqlu.createConnection(connectiondetails);
 	connection.connect();
-		connection.query(fs.readFileSync('data.sql','utf8'), function(err, results) {
+		connection.query(fs.readFileSync(tempdest,'utf8'), function(err, results) {
 			if(err){
 				console.log(err);	
 			}
@@ -165,7 +169,7 @@ var mysqlreplicator = function(options,destinationconnection,done){
 	createdump(options, function(err,data){
 		if(!err){
 			copytodestinatoin(destinationconnection,function(err,data){
-				dont(err,data);
+				done(err,data);
 			})
 		}
 	});
