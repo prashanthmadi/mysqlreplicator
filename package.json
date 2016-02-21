@@ -1,0 +1,31 @@
+{
+  "name": "mysqlreplicator",
+  "version": "0.0.1",
+  "description": "MYSql replicator",
+  "main": "index.js",
+  "dependencies": {
+    "lodash": "^3.10.1",
+    "async": "^1.5.2",
+    "mysql": "^2.10.2",
+    "mq-node": "^1.0.11"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prashanthmadi/mysqlreplicator.git"
+  },
+  "keywords": [
+    "MYSql",
+    "MYSql-replicator",
+    "MYSql-migrate"
+  ],
+  "author": "Prashanth Madi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/prashanthmadi/mysqlreplicator/issues"
+  },
+  "homepage": "https://github.com/prashanthmadi/mysqlreplicator"
+}
